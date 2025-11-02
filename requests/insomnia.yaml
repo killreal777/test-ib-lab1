@@ -1,0 +1,154 @@
+type: collection.insomnia.rest/5.0
+name: ib-lab1
+meta:
+  id: wrk_4f9435467d304181a709729cfaf2f247
+  created: 1762198115283
+  modified: 1762200387029
+collection:
+  - url: "{{ baseUrl }}/api/data"
+    name: Get data
+    meta:
+      id: req_2db6b1c84a6347c4bac57bf73c3f55a8
+      created: 1762194528004
+      modified: 1762196024829
+      isPrivate: false
+      sortKey: -1762194830934
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.1
+      - name: Authorization
+        value: Bearer {{ accessToken }}
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ baseUrl }}/api/data"
+    name: Save data
+    meta:
+      id: req_2a07d42945ca4a6cb884d66c1442d87c
+      created: 1762194532506
+      modified: 1762198764558
+      isPrivate: false
+      sortKey: -1762194830984
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "name": "<>"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0ecc3cd22e2c469ca26f140027c90f70
+      - name: User-Agent
+        value: insomnia/11.0.1
+        id: pair_a24d209b76fa455aab39668c427a3c7e
+      - name: Authorization
+        value: Bearer {{ accessToken }}
+        id: pair_27215063058a46348357dcbcc60cb62b
+    authentication:
+      type: apikey
+      key: Bearer
+      value: eyJhbGciOiJIUzI1NiJ9.eyJlbmFibGVkIjp0cnVlLCJpZCI6MSwic3ViIjoidXNlcm5hbWUiLCJpYXQiOjE3NjIxOTQ2MzAsImV4cCI6MTc2MjI4MTAzMH0.ksNfHZtxgnQmddKQg20mw3j8uPOr3-tKtDX8xALsd1M
+      disabled: false
+      addTo: header
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ baseUrl }}/auth/login"
+    name: Login
+    meta:
+      id: req_adb308a7f76346aa83d19f6a9893c465
+      created: 1762194534351
+      modified: 1762196027385
+      isPrivate: false
+      sortKey: -1762194831034
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "username": "username",
+          "password": "qwerty12345"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.1
+    scripts:
+      afterResponse: |
+        const jsonBody = insomnia.response.json();
+        const accessToken = jsonBody.accessToken
+
+        insomnia.environment.set("accessToken", accessToken);
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ baseUrl }}/auth/register"
+    name: Resgister
+    meta:
+      id: req_95d5ccf95b6b4bf7a8a5b4378ec62f39
+      created: 1762194535669
+      modified: 1762198719974
+      isPrivate: false
+      sortKey: -1762194831084
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "username": "<script>alert('Hacked!!!!!')</script>",
+          "password": "qwerty12345"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.1
+    scripts:
+      afterResponse: |
+        const jsonBody = insomnia.response.json();
+        const accessToken = jsonBody.accessToken
+
+        insomnia.environment.set("accessToken", accessToken);
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_06b2d45cb1994bb1adeae47ee3a82e7d
+    created: 1762194521404
+    modified: 1762198740410
+environments:
+  name: Local
+  meta:
+    id: env_7e20524fbce04767b0215989fb9e9d4d
+    created: 1762194521400
+    modified: 1762198821589
+    isPrivate: false
+  data:
+    baseUrl: http://localhost:8080
+    accessToken: eyJpZCI6MSwiZW5hYmxlZCI6dHJ1ZSwic3ViIjoidXNlcm5hbWUiLCJpYXQiOjE3NjIxOTg3NDAsImV4cCI6MTc2MjI4NTE0MH0.AZ5KjaNU_RIoNe-Pp2z65uqAZbtbGPV3DMHo16Ph9WQ
